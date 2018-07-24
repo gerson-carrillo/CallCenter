@@ -1,14 +1,15 @@
 package com.almundo.CallCenter;
 
+/**
+ * Clase que guarda los datos de la llamada
+ * */
 public class CallDTO {
 	
 	int intCall;
-	int intDuration;
 	String strRole;
 	
-	public CallDTO(int intCall, int intDuration) {
+	public CallDTO(int intCall) {
 		this.intCall = intCall;
-		this.intDuration = intDuration;
 	}
 
 	public int getIntCall() {
@@ -17,14 +18,6 @@ public class CallDTO {
 
 	public void setIntCall(int intCall) {
 		this.intCall = intCall;
-	}
-
-	public int getIntDuration() {
-		return intDuration;
-	}
-
-	public void setIntDuration(int intDuration) {
-		this.intDuration = intDuration;
 	}
 
 	public String getStrRole() {

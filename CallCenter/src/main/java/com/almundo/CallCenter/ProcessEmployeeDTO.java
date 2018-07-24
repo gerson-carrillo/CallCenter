@@ -1,6 +1,11 @@
 package com.almundo.CallCenter;
 
+/**
+ * Clase que guarda los datos de cada rol
+ * */
 public class ProcessEmployeeDTO {
+	
+	/*Se crean las variables necesarias para cada rol, numero de llamadas que puede procesar y llamadas actuales*/
 	private int intMaxProcess;
 	private int intCurrentProcess;
 	private RoleEnum roleEnum;

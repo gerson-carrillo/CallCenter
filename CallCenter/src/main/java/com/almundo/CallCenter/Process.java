@@ -1,5 +1,10 @@
 package com.almundo.CallCenter;
 
+import java.util.Random;
+
+/**
+ * Clase que ejecuta que procesa las llamadas
+ * */
 public class Process implements Runnable {
 	
 	private CallDTO call;
@@ -11,12 +16,16 @@ public class Process implements Runnable {
 	@Override
 	public void run() {
 		try {
-		System.out.println("Inicia El usuario con role " + call.getStrRole() + " procesa la llamada numero " + call.getIntCall() + " con duración " + this.call.getIntDuration());
+		
+		/*Se parametriza el tiempo de espera de la llamada*/
+		Random rn = new Random();
+		int intDuration = rn.nextInt(6) + 5;
+		System.out.println("Inicia El usuario con role " + call.getStrRole() + " procesa la llamada numero " + call.getIntCall() );
 
-        this.waitSeconds(this.call.getIntDuration());
+        this.waitSeconds(intDuration);
         
 		System.out.println("Finaliza El usuario con role " + call.getStrRole() +  
-								 " procesa la llamada numero " + call.getIntCall() + " con duración " + this.call.getIntDuration());
+								 " procesa la llamada numero " + call.getIntCall() + " con duracion en segundos de " + intDuration);
 		}catch(Exception e) {
 			System.out.println("Error");
 			e.getMessage();
@@ -27,7 +36,9 @@ public class Process implements Runnable {
 
 	private void waitSeconds(int intDuration) {
 		try {
+			
 			Thread.sleep(intDuration * 1000);
+			//System.out.println("Llamada demora en segundos = " + intDuration);  
 		} catch (InterruptedException ex) {
 			Thread.currentThread().interrupt();
 		}
