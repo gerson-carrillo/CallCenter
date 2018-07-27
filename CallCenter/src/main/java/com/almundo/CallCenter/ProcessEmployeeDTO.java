@@ -1,35 +1,23 @@
 package com.almundo.CallCenter;
 
 /**
- * Clase que guarda los datos de cada rol
+ * Clase que guarda los datos de cada rol y las personas asignadas al rol
  * */
 public class ProcessEmployeeDTO {
 	
 	/*Se crean las variables necesarias para cada rol, numero de llamadas que puede procesar y llamadas actuales*/
-	private int intMaxProcess;
-	private int intCurrentProcess;
+	private int intMaxConcurrentCalls;
 	private RoleEnum roleEnum;
 	
-	public ProcessEmployeeDTO(int intMaxProcess, RoleEnum roleEnum) {
-		this.intMaxProcess = intMaxProcess;
-		this.intCurrentProcess = 1;
+	/**
+	 * Constructor que inicializa el numero de personas que estan asignadas a un rol, 
+	 * de esta forma se sabe cuantas personas pueden atender llamadas de forma concurrente
+	 * @param intMaxProcess Número de llamadas que pueden ser atendidas de forma concurrente para el rol indicado
+	 * @param roleEnum Rol asignado
+	 * */
+	public ProcessEmployeeDTO(int intMaxConcurrentCalls, RoleEnum roleEnum) {
+		this.intMaxConcurrentCalls = intMaxConcurrentCalls;
 		this.roleEnum= roleEnum;
-	}
-
-	public int getIntMaxProcess() {
-		return intMaxProcess;
-	}
-
-	public void setIntMaxProcess(int intMaxProcess) {
-		this.intMaxProcess = intMaxProcess;
-	}
-
-	public int getIntCurrentProcess() {
-		return intCurrentProcess;
-	}
-
-	public void setIntCurrentProcess(int intCurrentProcess) {
-		this.intCurrentProcess = intCurrentProcess;
 	}
 
 	public RoleEnum getRoleEnum() {
@@ -38,6 +26,14 @@ public class ProcessEmployeeDTO {
 
 	public void setRoleEnum(RoleEnum roleEnum) {
 		this.roleEnum = roleEnum;
+	}
+
+	public int getIntMaxConcurrentCalls() {
+		return intMaxConcurrentCalls;
+	}
+
+	public void setIntMaxConcurrentCalls(int intMaxConcurrentCalls) {
+		this.intMaxConcurrentCalls = intMaxConcurrentCalls;
 	}
 	
 }
