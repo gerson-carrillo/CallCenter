@@ -90,9 +90,18 @@ public class Dispatcher implements Runnable  {
 		
 		/*Se crea un executor service para cada rol (operador, supervisor, director), 
 		 * con el máximo de hilos permitidos que se parametrizan en el constructor de esta clase, de esta forma nunca se van a asignar mas llamadas que las permitidas a las personas o roles*/
-		ExecutorService executorOperator = Executors.newFixedThreadPool( Dispatcher.mapProcessEmployee.get(RoleEnum.OPERATOR.name()).getIntMaxConcurrentCalls() );
-		ExecutorService executorSupervisor = Executors.newFixedThreadPool( Dispatcher.mapProcessEmployee.get(RoleEnum.SUPERVISOR.name()).getIntMaxConcurrentCalls() );
-		ExecutorService executorDirector = Executors.newFixedThreadPool( Dispatcher.mapProcessEmployee.get(RoleEnum.DIRECTOR.name()).getIntMaxConcurrentCalls() );
+		ExecutorService executorOperator = null;
+		ExecutorService executorSupervisor = null;
+		ExecutorService executorDirector = null;
+	
+		
+		try {
+		
+		/*Se crea un executor service para cada rol (operador, supervisor, director), 
+		 * con el máximo de hilos permitidos que se parametrizan en el constructor de esta clase, de esta forma nunca se van a asignar mas llamadas que las permitidas a las personas o roles*/
+		executorOperator = Executors.newFixedThreadPool( Dispatcher.mapProcessEmployee.get(RoleEnum.OPERATOR.name()).getIntMaxConcurrentCalls() );
+		executorSupervisor = Executors.newFixedThreadPool( Dispatcher.mapProcessEmployee.get(RoleEnum.SUPERVISOR.name()).getIntMaxConcurrentCalls() );
+		executorDirector = Executors.newFixedThreadPool( Dispatcher.mapProcessEmployee.get(RoleEnum.DIRECTOR.name()).getIntMaxConcurrentCalls() );
 		
 		/*Al iniciar el proceso de atención de llamadas, se hace una advertencia en caso de que se exceda el maximo de llamadas permitidas.
 		 * De igual forma, las llamadas se procesan por las personas, quedan en espera hasta que una persona, respetando la asignación según roles.
@@ -163,8 +172,8 @@ public class Dispatcher implements Runnable  {
 			
 			
 			/*Si se intenta 10 veces y no se responde una llamada, se asume las personas no estan respondiendo. Se termina el proceso*/
-			if(Dispatcher.intTryCalls == 5) {
-				System.out.println("Se identifica que en 20 intentos no se responden llamadas, no se atienden mas llamadas, el sistema espera llamadas en curso y finaliza...");
+			if(Dispatcher.intTryCalls == 10) {
+				System.out.println("Se identifica que en 10 intentos no se responden llamadas, no se atienden mas llamadas, el sistema espera llamadas en curso y finaliza...");
 				break;
 			}
 				
@@ -183,6 +192,17 @@ public class Dispatcher implements Runnable  {
         this.waitSeconds(15);
 		System.out.println("--------  Finaliza atencion de llamadas...");
 
+		}
+		finally {
+			/*Se finalizan todas las tareas en caso de un error o problema no manejado*/
+			if(executorOperator != null)
+				executorOperator.shutdownNow(); 
+			if(executorSupervisor != null)
+				executorSupervisor.shutdownNow();
+			if(executorDirector != null)
+				executorDirector.shutdownNow();
+		}
+		
 		
 	}	
 	

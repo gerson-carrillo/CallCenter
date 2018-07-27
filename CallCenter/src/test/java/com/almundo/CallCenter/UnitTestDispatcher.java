@@ -12,7 +12,7 @@ public class UnitTestDispatcher {
 		// TODO Descomentarear el código para ejecutar la prueba unitaria requerida
 		
 
-		/**Se prueba el escerario 1:
+		/*Se prueba el escerario 1:
 			La clase Dispatcher debe tener la capacidad de poder procesar 10
 			llamadas al mismo tiempo (de modo concurrente). 
 		 Se crea el test para cumplir con: Debe tener un test unitario donde lleguen 10 llamadas.
@@ -25,11 +25,16 @@ public class UnitTestDispatcher {
 		/*prueba unitaria para:
 			Dar alguna solución sobre qué pasa con una llamada cuando no hay
 			ningún empleado libre. 
+			
+			SOLUCIÓN DADA: Al identificar que no se estan respondiendo llamadas, en 10 intentos aproximadamente 20-30 segundos, 
+			la aplicación para el proceso (no sigue asignando mas llamadas) y 
+			espera a que las llamadas en curso finalicen, para terminar todo de forma exitosa.
+			
 		 * */
 		//unitTestTwoNoAttendCalls();
 		
 		
-		/**
+		/*
 		Dar alguna solución sobre qué pasa con una llamada cuando entran
 		más de 10 llamadas concurrentes.
 		
